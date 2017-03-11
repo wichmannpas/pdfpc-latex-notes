@@ -17,9 +17,28 @@
 \RequirePackage{forloop}
 \RequirePackage{pdftexcmds}
 
+% Handling of kv parameters.
+% We have the following options, that all take time in the HH:MM format
 \RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=PDFPC,
+  prefix=PDFPC@
+}
+\DeclareStringOption{duration}
+\DeclareStringOption{starttime}
+\DeclareStringOption{endtime}
+\DeclareStringOption{lastminutes}
 \DeclareStringOption{fontsize}[32130]
-\ProcessKeyvalOptions*\relax
+
+\ProcessKeyvalOptions*
+
+% Small macro to make inserting options easier.
+\newcommand\PDFPC@option[2]{
+  \ifx#2\@empty\else
+    \immediate\write\pdfpcnotesfile{[#1]}%
+    \immediate\write\pdfpcnotesfile{#2}%
+  \fi
+}
 
 % create a new file handle
 \newwrite\pdfpcnotesfile
@@ -34,6 +53,11 @@
 		\immediate\write\pdfpcnotesfile{[fontsize]^^J\pdfpcnotes@fontsize}
 	\fi
 	\immediate\write\pdfpcnotesfile{[notes]}
+ \PDFPC@option{duration}{\PDFPC@duration}
+ \PDFPC@option{starttime}{\PDFPC@starttime}
+ \PDFPC@option{endtime}{\PDFPC@endtime}
+ \PDFPC@option{lastminutes}{\PDFPC@lastminutes}
+  \immediate\write\pdfpcnotesfile{[notes]}
 }
 % define a # http://tex.stackexchange.com/a/37757/10327
 \begingroup
