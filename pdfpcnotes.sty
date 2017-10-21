@@ -28,7 +28,7 @@
 \DeclareStringOption{starttime}
 \DeclareStringOption{endtime}
 \DeclareStringOption{lastminutes}
-\DeclareStringOption{fontsize}[32130]
+\DeclareStringOption{fontsize}
 
 \ProcessKeyvalOptions*
 
@@ -57,6 +57,7 @@
  \PDFPC@option{starttime}{\PDFPC@starttime}
  \PDFPC@option{endtime}{\PDFPC@endtime}
  \PDFPC@option{lastminutes}{\PDFPC@lastminutes}
+ \PDFPC@option{fontsize}{\PDFPC@fontsize}
   \immediate\write\pdfpcnotesfile{[notes]}
 }
 % define a # http://tex.stackexchange.com/a/37757/10327
